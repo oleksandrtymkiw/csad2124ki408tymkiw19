@@ -10,3 +10,4 @@
 Мова: Python
 Інструменти розробки: PyCharm
 HW: CY8CKIT-042 PSoC® 4 Pioneer Ki
+///
