@@ -1,9 +1,6 @@
-name: Python and Arduino CI
+name: Python
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   python-tests:
@@ -20,16 +17,3 @@ jobs:
           pip install -r requirements.txt
       - name: Run Python tests
         run: pytest
-
-  arduino-build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Install arduino-cli
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-          ./bin/arduino-cli core update-index
-          ./bin/arduino-cli core install arduino:avr
-      - name: Compile Arduino sketch
-        run: ./bin/arduino-cli compile --fqbn arduino:avr:uno arduino/your_sketch_folder
