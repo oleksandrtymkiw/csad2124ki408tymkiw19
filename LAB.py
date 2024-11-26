@@ -3,19 +3,20 @@ import time
 import threading
 
 def send_command(command):
-
     ser.write((command + '\n').encode())
     time.sleep(0.1)
+
 
 def start_game(mode):
     print(f"Sending START command for MODE {mode}...")
     send_command(f"MODE {mode}")
     send_command("START")
 
-def reset_game():
 
+def reset_game():
     print("Sending RESET command...")
     send_command("RESET")
+
 
 def read_moves():
 
@@ -27,6 +28,7 @@ def read_moves():
         except Exception as e:
             print(f"Error reading data: {e}")
             break
+
 
 def main():
     global ser
@@ -59,6 +61,7 @@ def main():
             start_game("4")
         elif option == '5':
             reset_game()
+
 
 if __name__ == "__main__":
     main()
