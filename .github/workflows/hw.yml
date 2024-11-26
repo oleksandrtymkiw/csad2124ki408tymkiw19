@@ -1,15 +1,14 @@
 ---
-name: Arduino Lint
+name: Compile Arduino Code
 
 on:
   push:
     paths:
       - '**/*.ino'
-      - '.github/workflows/hw.yml'
 
 jobs:
-  lint:
-    name: Lint Arduino code
+  compile:
+    name: Compile Arduino Code
     runs-on: ubuntu-latest
 
     steps:
@@ -21,13 +20,5 @@ jobs:
         with:
           version: 0.32.1
 
-      - name: Install Arduino Lint
-        run: |
-          arduino-cli core update-index
-          arduino-cli core install arduino:avr
-          arduino-cli lib update-index
-          arduino-cli core list
-
-      - name: Run Arduino Lint
-        run: |
-          arduino-cli lint --strict .
+      - name: Compile Arduino Code
+        run: arduino-cli compile --fqbn arduino:avr:uno path/to/your/sketch.ino
