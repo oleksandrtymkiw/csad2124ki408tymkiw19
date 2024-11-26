@@ -24,5 +24,8 @@ jobs:
       - name: Install AVR core
         run: arduino-cli core install arduino:avr
 
+      - name: Install Keypad library
+        run: arduino-cli lib install "Keypad"
+
       - name: Compile Arduino Code
         run: arduino-cli compile --fqbn arduino:avr:uno
