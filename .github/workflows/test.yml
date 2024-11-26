@@ -1,20 +1,17 @@
-name: Python
+name: Super-Linter
 
 on: push
 
 jobs:
-  python-tests:
+  super-lint:
+    name: Lint code base
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-      - name: Install dependencies
-        run: |
-          pip install pytest
-          pip install -r requirements.txt
-      - name: Run Python tests
-        run: pytest
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
