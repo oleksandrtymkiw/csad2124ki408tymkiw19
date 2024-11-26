@@ -1,9 +1,10 @@
 import serial
-import time
 import threading
+import time
+
 
 def send_command(command):
-    ser.write((command + '\n').encode())
+    ser.write((command + "\n").encode())
     time.sleep(0.1)
 
 
@@ -14,17 +15,17 @@ def start_game(mode):
 
 
 def reset_game():
-    print("Sending RESET command...")
+    print("Resetting game...")
     send_command("RESET")
 
 
 def read_moves():
-
+    print("Reading moves from Arduino...")
     while True:
         try:
             move = ser.readline().decode().strip()
             if move:
-                print(move) 
+                print(move)
         except Exception as e:
             print(f"Error reading data: {e}")
             break
@@ -33,33 +34,34 @@ def read_moves():
 def main():
     global ser
     try:
-        ser = serial.Serial('COM2', 9600, timeout=1)
-        time.sleep(2) 
+        ser = serial.Serial("COM2", 9600, timeout=1)
+        time.sleep(2)
     except Exception as e:
         print(f"Error opening serial port: {e}")
         return
 
     print("Welcome to Tic-Tac-Toe!")
-    print("1. Man vs AI")
-    print("2. Man vs Man")
+    print("Select a game mode:")
+    print("1. Player vs AI")
+    print("2. Player vs Player")
     print("3. AI vs AI (Random)")
-    print("4. AI vs AI (Win strategy)\n In Progress")
-    print("5. Reset game")
+    print("4. AI vs AI (Win Strategy)")
+    print("5. Reset Game")
 
     reader_thread = threading.Thread(target=read_moves, daemon=True)
     reader_thread.start()
 
     while True:
         option = input("Choose an option (1-5): ").strip()
-        if option == '1':
+        if option == "1":
             start_game("1")
-        elif option == '2':
+        elif option == "2":
             start_game("2")
-        elif option == '3':
+        elif option == "3":
             start_game("3")
-        elif option == '4':
+        elif option == "4":
             start_game("4")
-        elif option == '5':
+        elif option == "5":
             reset_game()
 
 
