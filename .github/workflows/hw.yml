@@ -21,5 +21,8 @@ jobs:
         with:
           version: 0.32.1
 
+      - name: Install AVR core
+        run: arduino-cli core install arduino:avr
+
       - name: Compile Arduino Code
         run: arduino-cli compile --fqbn arduino:avr:uno
