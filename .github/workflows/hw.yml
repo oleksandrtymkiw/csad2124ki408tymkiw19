@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - '**/*.ino'
+      - '.github/workflows/hw.yml'
 
 jobs:
   compile:
