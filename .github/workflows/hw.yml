@@ -1,5 +1,5 @@
 ---
-name: Arduino CI
+name: Compile Arduino Code
 
 on:
   push:
@@ -8,23 +8,18 @@ on:
       - '.github/workflows/hw.yml'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # Використовуємо Ubuntu як середовище для CI
+  compile:
+    name: Compile Arduino Code
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3  # Завантажуємо код з репозиторію
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Arduino CLI
-      uses: arduino/arduino-cli-action@v2 # Використовуємо GitHub Action для налаштування Arduino CLI
-      with:
-        version: 1.1.1  # Вказуємо версію Arduino CLI
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+        with:
+          version: 0.32.1
 
-    - name: Install dependencies
-      run: |
-        arduino-cli core update-index  # Оновлюємо список доступних ядер
-        arduino-cli core install arduino:avr  # Встановлюємо ядро для Arduino UNO
-
-    - name: Compile Arduino Sketch
-      run: |
-        arduino-cli compile --fqbn arduino:avr:uno ./sketch.ino  # Замість path/to/your/sketch вкажіть шлях до вашого скетчу
+      - name: Compile Arduino Code
+        run: arduino-cli compile --fqbn arduino:avr:uno
