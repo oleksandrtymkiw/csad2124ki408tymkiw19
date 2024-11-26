@@ -1,6 +1,11 @@
+---
 name: Arduino Lint
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**/*.ino'
+      - '.github/workflows/hw.yml'
 
 jobs:
   lint:
