@@ -1,0 +1,22 @@
+name: Arduino Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    name: Lint Arduino code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+        with:
+          version: latest
+
+      - name: Run Arduino Lint
+        run: |
+          arduino-cli lib install arduino_lint
+          arduino-lint --strict .
