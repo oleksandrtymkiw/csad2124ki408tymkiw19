@@ -1,6 +1,11 @@
+---
 name: Super-Linter
 
-on: push
+on:
+  push:
+    paths:
+      - '**/*.py'
+      - '.github/workflows/test.yml'
 
 jobs:
   super-lint:
