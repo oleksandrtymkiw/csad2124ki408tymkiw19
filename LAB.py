@@ -1,7 +1,7 @@
-import serial
 import threading
 import time
 
+import serial
 
 def send_command(command):
     ser.write((command + "\n").encode())
