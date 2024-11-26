@@ -21,4 +21,4 @@ jobs:
           version: 0.32.1
 
       - name: Compile Arduino Code
-        run: arduino-cli compile --fqbn arduino:avr:uno path/to/your/sketch.ino
+        run: arduino-cli compile --fqbn arduino:avr:uno sketch.ino
