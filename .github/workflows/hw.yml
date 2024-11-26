@@ -19,9 +19,15 @@ jobs:
       - name: Setup Arduino CLI
         uses: arduino/setup-arduino-cli@v2
         with:
-          version: 1.1.1
+          version: 0.32.1
+
+      - name: Install Arduino Lint
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+          arduino-cli lib update-index
+          arduino-cli core list
 
       - name: Run Arduino Lint
         run: |
-          arduino-cli lib install arduino_lint
-          arduino-lint --strict .
+          arduino-cli lint --strict .
