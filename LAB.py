@@ -3,6 +3,7 @@ import time
 
 import serial
 
+
 def send_command(command):
     ser.write((command + "\n").encode())
     time.sleep(0.1)
